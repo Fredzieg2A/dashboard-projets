@@ -38,12 +38,12 @@ function initModals() {
     document.getElementById("save-task-btn").addEventListener("click", saveTask);
 
     // Ajout des événements pour les boutons "Initialiser un projet" et "Modifier"
-    document.getElementById("btn-edit-project").addEventListener("click", function () {
-        openModal("edit-project-modal");
-    });
-
     document.getElementById("btn-init-project").addEventListener("click", function () {
         openModal("init-project-modal");
+    });
+
+    document.getElementById("btn-edit-project").addEventListener("click", function () {
+        openModal("edit-project-modal");
     });
 }
 
