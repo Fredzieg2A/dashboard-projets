@@ -192,10 +192,46 @@
         </div>
         
         <!-- Modals pour l'édition -->
-        <!-- Modal Informations du projet -->
-        <div id="project-info-modal" class="modal">
+        <!-- Modal Initialiser un projet -->
+        <div id="init-project-modal" class="modal">
             <div class="modal-content">
-                <span class="close" onclick="closeModal('project-info-modal')">&times;</span>
+                <span class="close" onclick="closeModal('init-project-modal')">&times;</span>
+                <h2>Initialiser un projet</h2>
+                <div class="form-group">
+                    <label for="init-project-name">Nom du Projet:</label>
+                    <input type="text" id="init-project-name">
+                </div>
+                <div class="form-group">
+                    <label for="init-project-manager">Chef de Projet:</label>
+                    <input type="text" id="init-project-manager">
+                </div>
+                <div class="form-group">
+                    <label for="init-start-date">Date de Début:</label>
+                    <input type="date" id="init-start-date">
+                </div>
+                <div class="form-group">
+                    <label for="init-end-date">Date de Fin Prévue:</label>
+                    <input type="date" id="init-end-date">
+                </div>
+                <div class="form-group">
+                    <label for="init-project-budget">Budget (€):</label>
+                    <input type="number" id="init-project-budget">
+                </div>
+                <div class="form-group">
+                    <label for="init-project-objectives">Objectifs:</label>
+                    <textarea id="init-project-objectives" rows="3"></textarea>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn" onclick="createProject()">Créer</button>
+                    <button class="btn btn-red" onclick="closeModal('init-project-modal')">Annuler</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Modifier un projet -->
+        <div id="edit-project-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('edit-project-modal')">&times;</span>
                 <h2>Modifier les informations du projet</h2>
                 <div class="form-group">
                     <label for="edit-project-name">Nom du Projet:</label>
@@ -222,12 +258,12 @@
                     <textarea id="edit-project-objectives" rows="3"></textarea>
                 </div>
                 <div class="action-buttons">
-                    <button class="btn" onclick="saveProjectInfo()">Enregistrer</button>
-                    <button class="btn btn-red" onclick="closeModal('project-info-modal')">Annuler</button>
+                    <button class="btn" onclick="saveProjectInfo()">Modifier</button>
+                    <button class="btn btn-red" onclick="closeModal('edit-project-modal')">Annuler</button>
                 </div>
             </div>
         </div>
-        
+                
         <!-- Modal Phase -->
         <div id="phase-modal" class="modal">
             <div class="modal-content">
