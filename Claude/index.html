@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion de Projet Interactive</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Tableau de Bord - Gestion de Projet</h1>
+        
+        <div class="tabs">
+            <button class="tab-button active" id="btn-apercu">Aperçu du Projet</button>
+            <button class="tab-button" id="btn-taches">Tâches</button>
+            <button class="tab-button" id="btn-gantt">Diagramme de Gantt</button>
+            <button class="tab-button" id="btn-ressources">Ressources</button>
+            <button class="tab-button" id="btn-risques">Risques</button>
+            <button class="tab-button" id="btn-rapports">Rapports</button>
+        </div>
+        
+        <!-- Aperçu du projet -->
+        <div id="apercu" class="tab-content active">
+            <div class="section">
+                <h2>Informations du Projet <button class="btn btn-blue" id="btn-edit-project">Initialiser un projet</button><button id="btn-init-project" class="btn btn-blue">Modifier</button></h2>
+                <table id="project-info-table">
+                    <tr>
+                        <td><strong>Nom du Projet:</strong></td>
+                        <td id="project-name">[Nom du Projet]</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Chef de Projet:</strong></td>
+                        <td id="project-manager">[Votre Nom]</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Date de Début:</strong></td>
+                        <td id="start-date">[JJ/MM/AAAA]</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Date de Fin Prévue:</strong></td>
+                        <td id="end-date">[JJ/MM/AAAA]</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Budget:</strong></td>
+                        <td id="project-budget">[Montant] €</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Objectifs:</strong></td>
+                        <td id="project-objectives">[Description des objectifs principaux]</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="section">
+                <h2>Progression Globale</h2>
+                <div class="progress-container">
+                    <div class="progress-bar" id="global-progress-bar" style="width:45%">45%</div>
+                </div>
+                <br>
+                <table id="phase-progress-table">
+                    <tr>
+                        <th>Phase</th>
+                        <th>Progression</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                    <!-- Les phases seront chargées ici dynamiquement -->
+                </table>
+            </div>
+        </div>
+        
+        <!-- Gestion des tâches -->
+        <div id="taches" class="tab-content">
+            <div class="section">
+                <h2>Liste des Tâches <button class="btn" id="btn-add-task">+ Ajouter une tâche</button></h2>
+                <table id="tasks-table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Tâche</th>
+                        <th>Responsable</th>
+                        <th>Date Début</th>
+                        <th>Date Fin</th>
+                        <th>Progression</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                    <!-- Les tâches seront chargées ici dynamiquement -->
+                </table>
+            </div>
+        </div>
+        
+        <!-- Diagramme de Gantt -->
+        <div id="gantt" class="tab-content">
+            <div class="section">
+                <h2>Diagramme de Gantt</h2>
+                <div id="gantt-chart">
+                    <table id="gantt-table">
+                        <tr id="gantt-header">
+                            <th>Tâche</th>
+                            <!-- Les en-têtes de semaines seront ajoutées dynamiquement -->
+                        </tr>
+                        <!-- Les lignes de tâches seront ajoutées dynamiquement -->
+                    </table>
+                </div>
+                <p>Légende: <span style="color:#2ecc71;">■</span> Terminé | <span style="color:#3498db;">■</span> En cours | <span style="color:#f39c12;">■</span> À venir</p>
+            </div>
+        </div>
+        
+        <!-- Gestion des ressources -->
+        <div id="ressources" class="tab-content">
+            <div class="section">
+                <h2>Allocation des Ressources <button class="btn" id="btn-add-resource">+ Ajouter une ressource</button></h2>
+                <table id="resources-table">
+                    <tr>
+                        <th>Nom</th>
+                        <th>Rôle</th>
+                        <th>Disponibilité</th>
+                        <th>Tâches Assignées</th>
+                        <th>Actions</th>
+                    </tr>
+                    <!-- Les ressources seront chargées ici dynamiquement -->
+                </table>
+            </div>
+        </div>
+        
+        <!-- Registre des risques -->
+        <div id="risques" class="tab-content">
+            <div class="section">
+                <h2>Registre des Risques <button class="btn" id="btn-add-risk">+ Ajouter un risque</button></h2>
+                <table id="risks-table">
+                    <tr>
+                        <th>Risque</th>
+                        <th>Probabilité</th>
+                        <th>Impact</th>
+                        <th>Score</th>
+                        <th>Stratégie d'Atténuation</th>
+                        <th>Responsable</th>
+                        <th>Actions</th>
+                    </tr>
+                    <!-- Les risques seront chargés ici dynamiquement -->
+                </table>
+            </div>
+        </div>
+        
+        <!-- Rapports -->
+        <div id="rapports" class="tab-content">
+            <div class="section">
+                <h2>Rapports et Statistiques</h2>
+                <div class="report-grid">
+                    <div class="report-card">
+                        <h3>Avancement du Projet</h3>
+                        <div id="progress-chart">
+                            <div class="chart-placeholder">
+                                <canvas id="progressChart" width="300" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="report-card">
+                        <h3>Répartition des Tâches</h3>
+                        <div id="tasks-chart">
+                            <div class="chart-placeholder">
+                                <canvas id="tasksChart" width="300" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="report-card">
+                        <h3>État des Risques</h3>
+                        <div id="risks-chart">
+                            <div class="chart-placeholder">
+                                <canvas id="risksChart" width="300" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="report-card">
+                        <h3>Charge de Travail des Ressources</h3>
+                        <div id="resources-chart">
+                            <div class="chart-placeholder">
+                                <canvas id="resourcesChart" width="300" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="report-section">
+                    <h3>Rapport d'Avancement</h3>
+                    <textarea id="progress-report" rows="10" placeholder="Saisissez votre rapport d'avancement ici..."></textarea>
+                    <div class="action-buttons">
+                        <button class="btn" onclick="saveProgressReport()">Enregistrer</button>
+                        <button class="btn btn-blue" onclick="generateReport()">Générer un Rapport PDF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modals pour l'édition -->
+        <!-- Modal Informations du projet -->
+        <div id="project-info-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('project-info-modal')">&times;</span>
+                <h2>Modifier les informations du projet</h2>
+                <div class="form-group">
+                    <label for="edit-project-name">Nom du Projet:</label>
+                    <input type="text" id="edit-project-name">
+                </div>
+                <div class="form-group">
+                    <label for="edit-project-manager">Chef de Projet:</label>
+                    <input type="text" id="edit-project-manager">
+                </div>
+                <div class="form-group">
+                    <label for="edit-start-date">Date de Début:</label>
+                    <input type="date" id="edit-start-date">
+                </div>
+                <div class="form-group">
+                    <label for="edit-end-date">Date de Fin Prévue:</label>
+                    <input type="date" id="edit-end-date">
+                </div>
+                <div class="form-group">
+                    <label for="edit-project-budget">Budget (€):</label>
+                    <input type="number" id="edit-project-budget">
+                </div>
+                <div class="form-group">
+                    <label for="edit-project-objectives">Objectifs:</label>
+                    <textarea id="edit-project-objectives" rows="3"></textarea>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn" onclick="saveProjectInfo()">Enregistrer</button>
+                    <button class="btn btn-red" onclick="closeModal('project-info-modal')">Annuler</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal Phase -->
+        <div id="phase-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('phase-modal')">&times;</span>
+                <h2>Modifier la phase</h2>
+                <div class="form-group">
+                    <label for="edit-phase-name">Nom de la Phase:</label>
+                    <input type="text" id="edit-phase-name" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="edit-phase-progress">Progression (%):</label>
+                    <input type="number" id="edit-phase-progress" min="0" max="100">
+                </div>
+                <div class="form-group">
+                    <label for="edit-phase-status">Statut:</label>
+                    <select id="edit-phase-status">
+                        <option value="pending">À venir</option>
+                        <option value="progress">En cours</option>
+                        <option value="completed">Terminé</option>
+                        <option value="delayed">En retard</option>
+                    </select>
+                </div>
+                <input type="hidden" id="edit-phase-index">
+                <div class="action-buttons">
+                    <button class="btn" onclick="savePhase()">Enregistrer</button>
+                    <button class="btn btn-red" onclick="closeModal('phase-modal')">Annuler</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal Tâche -->
+        <div id="task-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('task-modal')">&times;</span>
+                <h2 id="task-modal-title">Ajouter une tâche</h2>
+                <div class="form-group">
+                    <label for="edit-task-name">Nom de la Tâche:</label>
+                    <input type="text" id="edit-task-name">
+                </div>
+                <div class="form-group">
+                    <label for="edit-task-responsible">Responsable:</label>
+                    <select id="edit-task-responsible">
+                        <!-- Options ajoutées dynamiquement -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="edit-task-start">Date de Début:</label>
+                    <input type="date" id="edit-task-start">
+                </div>
+                <div class="form-group">
+                    <label for="edit-task-end">Date de Fin:</label>
+                    <input type="date" id="edit-task-end">
+                </div>
+                <div class="form-group">
+                    <label for="edit-task-progress">Progression (%):</label>
+                    <input type="number" id="edit-task-progress" min="0" max="100">
+                </div>
+                <div class="form-group">
+                    <label for="edit-task-status">Statut:</label>
+                    <select id="edit-task-status">
+                        <option value="pending">À venir</option>
+                        <option value="progress">En cours</option>
+                        <option value="completed">Terminé</option>
+                        <option value="delayed">En retard</option>
+                    </select>
+                </div>
+                <input type="hidden" id="edit-task-id">
+                <div class="action-buttons">
+                    <button class="btn" id="save-task-btn" onclick="saveTask()">Enregistrer</button>
+                    <button class="btn btn-red" onclick="closeModal('task-modal')">Annuler</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal Ressource -->
+        <div id="resource-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('resource-modal')">&times;</span>
+                <h2 id="resource-modal-title">Ajouter une ressource</h2>
+                <div class="form-group">
+                    <label for="edit-resource-name">Nom:</label>
+                    <input type="text" id="edit-resource-name">
+                </div>
+                <div class="form-group">
+                    <label for="edit-resource-role">Rôle:</label>
+                    <input type="text" id="edit-resource-role">
+                </div>
+                <div class="form-group">
+                    <label for="edit-resource-availability">Disponibilité (%):</label>
+                    <input type="number" id="edit-resource-availability" min="0" max="100">
+                </div>
+                <input type="hidden" id="edit-resource-id">
+                <div class="action-buttons">
+                    <button class="btn" id="save-resource-btn" onclick="saveResource()">Enregistrer</button>
+                    <button class="btn btn-red" onclick="closeModal('resource-modal')">Annuler</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal Risque -->
+        <div id="risk-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('risk-modal')">&times;</span>
+                <h2 id="risk-modal-title">Ajouter un risque</h2>
+                <div class="form-group">
+                    <label for="edit-risk-description">Description du Risque:</label>
+                    <input type="text" id="edit-risk-description">
+                </div>
+                <div class="form-group">
+                    <label for="edit-risk-probability">Probabilité:</label>
+                    <select id="edit-risk-probability">
+                        <option value="Faible">Faible</option>
+                        <option value="Moyenne">Moyenne</option>
+                        <option value="Élevée">Élevée</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="edit-risk-impact">Impact:</label>
+                    <select id="edit-risk-impact">
+                        <option value="Faible">Faible</option>
+                        <option value="Moyen">Moyen</option>
+                        <option value="Élevé">Élevé</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="edit-risk-mitigation">Stratégie d'Atténuation:</label>
+                    <textarea id="edit-risk-mitigation" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="edit-risk-owner">Responsable:</label>
+                    <select id="edit-risk-owner">
+                        <!-- Options ajoutées dynamiquement -->
+                    </select>
+                </div>
+                <input type="hidden" id="edit-risk-id">
+                <div class="action-buttons">
+                    <button class="btn" id="save-risk-btn" onclick="saveRisk()">Enregistrer</button>
+                    <button class="btn btn-red" onclick="closeModal('risk-modal')">Annuler</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal Confirmation Suppression -->
+        <div id="delete-confirm-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('delete-confirm-modal')">&times;</span>
+                <h2>Confirmation de suppression</h2>
+                <p id="delete-confirm-message">Êtes-vous sûr de vouloir supprimer cet élément?</p>
+                <input type="hidden" id="delete-type">
+                <input type="hidden" id="delete-id">
+                <div class="action-buttons">
+                    <button class="btn btn-red" onclick="confirmDelete()">Supprimer</button>
+                    <button class="btn" onclick="closeModal('delete-confirm-modal')">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
