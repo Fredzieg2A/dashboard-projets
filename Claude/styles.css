@@ -191,6 +191,7 @@ label {
     font-weight: 600;
     color: #555;
     border-bottom: 3px solid transparent;
+    margin-right: 5px;
 }
 
 .tab-button:hover {
@@ -232,7 +233,7 @@ label {
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
-    margin-right: 5px;
+    margin-right: 10px;
     transition: background-color 0.3s, transform 0.1s;
     font-weight: 600;
 }
