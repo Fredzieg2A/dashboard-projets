@@ -166,6 +166,13 @@ label {
     background-color: #e74c3c;
     color: white;
 }
+/* Réduction de la taille des boutons dans la table */
+.tasks-table .btn {
+    padding: 5px 10px;
+    font-size: 12px;
+    margin: 2px;
+    min-width: 70px; /* Ajustement de la largeur minimale */
+}
 
 /* Navigation par onglets */
 .tabs {
@@ -175,6 +182,17 @@ label {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 0;
+}
+/* Ajustement des tableaux */
+#phase-table, #tasks-table {
+    width: 100%;
+    margin-top: 15px;
+}
+
+/* Boutons pour l'action */
+#phase-table .btn, #tasks-table .btn {
+    padding: 5px 8px;
+    font-size: 12px;
 }
 
 .tab-button {
@@ -213,6 +231,9 @@ label {
     border-radius: 0 0 5px 5px;
     animation: fadeIn 0.5s;
     background-color: white;
+
+    max-width: 1200px; /* Ajuste cette valeur si nécessaire */
+    margin: 0 auto;
 }
 
 .tab-content.active {
@@ -262,6 +283,21 @@ label {
 .btn-blue:hover {
     background-color: #2980b9;
 }
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px; /* Réduit l'espace entre les boutons */
+    margin-top: 10px;
+}
+.btn-green {
+    background-color: #2ecc71;
+}
+
+.btn-green:hover {
+    background-color: #27ae60;
+}
+
 
 /* Modales */
 .modal {
