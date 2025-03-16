@@ -28,7 +28,8 @@
                         <button class="btn btn-blue" id="btn-edit-project">Modifier</button>
                         <button class="btn btn-red" id="btn-delete-project">Supprimer</button>
                     </div>
-                </h2>                
+                </h2>
+                
                 <table id="project-info-table">
                     <tr>
                         <td><strong>Nom du Projet:</strong></td>
@@ -158,6 +159,9 @@
                     <div class="progress-bar" id="global-progress-bar" style="width:45%">45%</div>
                 </div>
                 <br>
+                <h2>Progression Globale 
+                    <button class="btn" id="btn-add-phase">+ Ajouter une phase</button>
+                </h2>                
                 <table id="phase-progress-table">
                     <tr>
                         <th>Phase</th>
@@ -365,18 +369,33 @@
             </div>
         </div>               
         <!-- Modal Phase -->
+        <!-- Modal Ajouter une phase -->
         <div id="phase-modal" class="modal">
+            <input type="hidden" id="edit-phase-index">
             <div class="modal-content">
                 <span class="close" onclick="closeModal('phase-modal')">&times;</span>
-                <h2>Modifier la phase</h2>
+                <h2>Ajouter une phase</h2>
+
                 <div class="form-group">
                     <label for="edit-phase-name">Nom de la Phase:</label>
-                    <input type="text" id="edit-phase-name" readonly>
+                    <input type="text" id="edit-phase-name">
                 </div>
+
+                <div class="form-group">
+                    <label for="edit-phase-start">Date de Début:</label>
+                    <input type="date" id="edit-phase-start">
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-phase-end">Date de Fin:</label>
+                    <input type="date" id="edit-phase-end">
+                </div>
+
                 <div class="form-group">
                     <label for="edit-phase-progress">Progression (%):</label>
                     <input type="number" id="edit-phase-progress" min="0" max="100">
                 </div>
+
                 <div class="form-group">
                     <label for="edit-phase-status">Statut:</label>
                     <select id="edit-phase-status">
@@ -386,7 +405,7 @@
                         <option value="delayed">En retard</option>
                     </select>
                 </div>
-                <input type="hidden" id="edit-phase-index">
+
                 <div class="action-buttons">
                     <button class="btn" onclick="savePhase()">Enregistrer</button>
                     <button class="btn btn-red" onclick="closeModal('phase-modal')">Annuler</button>
@@ -403,6 +422,12 @@
                     <label for="edit-task-name">Nom de la Tâche:</label>
                     <input type="text" id="edit-task-name">
                 </div>
+                <div class="form-group">
+                    <label for="edit-task-phase">Phase:</label>
+                    <select id="edit-task-phase">
+                        <!-- Options ajoutées dynamiquement -->
+                    </select>
+                </div>                
                 <div class="form-group">
                     <label for="edit-task-responsible">Responsable:</label>
                     <select id="edit-task-responsible">
